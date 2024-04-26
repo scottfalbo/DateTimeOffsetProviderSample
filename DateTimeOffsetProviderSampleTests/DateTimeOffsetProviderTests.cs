@@ -18,16 +18,16 @@ public class DateTimeOffsetProviderTests
         _dateTimeOffsetProvider = Substitute.For<IDateTimeOffsetProvider>();
 
         _dateTimeComparer = new DateTimeComparer(_dateTimeOffsetProvider);
+
+        var now = DateTimeOffset.Parse("2024-04-10");
+        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
     }
 
     [TestMethod]
     public void IsAfterNowUtc_WhenDateTimeIsAfterNow_ReturnsTrue()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-11");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsAfterNowUtc(dateTime);
@@ -40,10 +40,7 @@ public class DateTimeOffsetProviderTests
     public void IsAfterNowUtc_WhenDateTimeIsBeforeNow_ReturnsFalse()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-09");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsAfterNowUtc(dateTime);
@@ -56,10 +53,7 @@ public class DateTimeOffsetProviderTests
     public void IsAfterNowUtc_WhenDateTimeIsEqualToNow_ReturnsFalse()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-10");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsAfterNowUtc(dateTime);
@@ -72,10 +66,7 @@ public class DateTimeOffsetProviderTests
     public void IsBeforeNowUtc_WhenDateTimeIsAfterNow_ReturnsFalse()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-11");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsBeforeNowUtc(dateTime);
@@ -88,10 +79,7 @@ public class DateTimeOffsetProviderTests
     public void IsBeforeNowUtc_WhenDateTimeIsBeforeNow_ReturnsTrue()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-09");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsBeforeNowUtc(dateTime);
@@ -104,10 +92,7 @@ public class DateTimeOffsetProviderTests
     public void IsBeforeNowUtc_WhenDateTimeIsEqualToNow_ReturnsFalse()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-10");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsBeforeNowUtc(dateTime);
@@ -120,10 +105,7 @@ public class DateTimeOffsetProviderTests
     public void IsEqualToUtcNow_WhenDateTimeIsAfterNow_ReturnsFalse()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-11");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsEqualToUtcNow(dateTime);
@@ -136,10 +118,7 @@ public class DateTimeOffsetProviderTests
     public void IsEqualToUtcNow_WhenDateTimeIsBeforeNow_ReturnsFalse()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-09");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsEqualToUtcNow(dateTime);
@@ -152,10 +131,7 @@ public class DateTimeOffsetProviderTests
     public void IsEqualToUtcNow_WhenDateTimeIsEqualToNow_ReturnsTrue()
     {
         // Arrange
-        var now = DateTimeOffset.Parse("2024-04-10");
         var dateTime = DateTimeOffset.Parse("2024-04-10");
-
-        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
 
         // Act
         var result = _dateTimeComparer.IsEqualToUtcNow(dateTime);
