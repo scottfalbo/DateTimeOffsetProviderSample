@@ -24,6 +24,21 @@ public class DateTimeOffsetProviderTests
     }
 
     [TestMethod]
+    public void DateTimeOffset_UtcNow_DoesNotEquate()
+    {
+        // Arrange
+        var now = DateTimeOffset.UtcNow;
+        var dateTime = DateTimeOffset.UtcNow;
+        _dateTimeOffsetProvider.GetUtcNow().Returns(now);
+
+        // Act
+        var result = _dateTimeComparer.IsEqualToUtcNow(dateTime);
+
+        // Assert
+        Assert.IsFalse(result);
+    }
+
+    [TestMethod]
     public void IsAfterNowUtc_WhenDateTimeIsAfterNow_ReturnsTrue()
     {
         // Arrange
